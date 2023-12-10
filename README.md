@@ -103,7 +103,7 @@ Start the server
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `category`      | `string` | **Required**. Category of item to fetch |
-|
+
 
 #### Search Manga
 
@@ -117,7 +117,7 @@ Start the server
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `name`      | `string` | **Required**. Name of item to fetch |
-|
+
 
 #### Get Top Anime By Day
 
