@@ -35,11 +35,11 @@ Start the server
 
 #### Get all items
 
-```http
+```
   GET http://localhost:3002/v1?page=?limit=
 ```
 
-```http
+```
   GET http://localhost:3002/v2/danh-sach?page=?limit=
 ```
 
@@ -50,10 +50,10 @@ Start the server
 
 #### Get Manga
 
-```http
+```
   GET /v1/truyen-tranh/${name}
 ```
-```http
+```
   GET /v2/${name}
 ```
 
@@ -63,10 +63,10 @@ Start the server
 
 #### Get Chapter
 
-```http
+```
   GET /v1/truyen-tranh/${name}/${chapter}/${chapterId}
 ```
-```http
+```
   GET /v2/${name}/${chapterId}
 ```
 
@@ -78,10 +78,10 @@ Start the server
 
 #### Get Chapter
 
-```http
+```
   GET /v1/truyen-tranh/${name}/${chapter}/${chapterId}
 ```
-```http
+```
   GET /v2/${name}/${chapterId}
 ```
 
@@ -93,10 +93,10 @@ Start the server
 
 #### Get Category
 
-```http
+```
   GET /v1/tim-truyen/${category}
 ```
-```http
+```
   GET /v2/${category}
 ```
 
@@ -107,10 +107,10 @@ Start the server
 
 #### Search Manga
 
-```http
+```
   GET /v1/tim-truyen?name={name}
 ```
-```http
+```
   GET /v2//tim-kiem/${name}
 ```
 
@@ -121,10 +121,10 @@ Start the server
 
 #### Get Top Anime By Day
 
-```http
+```
   GET /v1/bxh
 ```
-```http
+```
   GET /v2/top-ngay
 ```
 
