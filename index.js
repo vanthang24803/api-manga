@@ -3,6 +3,7 @@ import express from "express";
 import { config } from "dotenv";
 
 import v1 from "./router/v1/manga.router.js";
+import v2 from "./router/v2/manga.router.js";
 
 config();
 
@@ -20,3 +21,4 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/v1", v1);
+app.use("/v2", v2);
