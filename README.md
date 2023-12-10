@@ -119,7 +119,7 @@ Start the server
 | `name`      | `string` | **Required**. Name of item to fetch |
 
 
-#### Get Top Anime By Day
+#### Get Top Anime
 
 ```
   GET /v1/bxh
