@@ -134,7 +134,7 @@ export const getDetailManga = async (req, res) => {
           chapters,
         });
       });
-      return res.status(200).json(data);
+      return res.status(200).json(data[0]);
     });
   } catch (error) {
     console.log(error);
@@ -176,7 +176,7 @@ export const getDetailChapter = async (req, res) => {
         images,
       });
     });
-    return res.status(200).json(data);
+    return res.status(200).json(data[0]);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Invalid Server", error: error.message });
