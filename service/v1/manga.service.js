@@ -6,8 +6,9 @@ config();
 
 export const getAllManga = async (req, res) => {
   try {
-    const thumbnail = [];
+    const data = [];
     let page = req.query.page;
+    let limit = req.query.limit;
     if (!page) {
       page = 1;
     }
@@ -15,33 +16,39 @@ export const getAllManga = async (req, res) => {
     axios.get(`${process.env.URL}?page=${page}`).then((response) => {
       const html = response.data;
       const $ = cheerio.load(html);
+      let count = 0; // Initialize count of items
       $(".row > .item ", html).each(function () {
-        const name = $(this).find("figcaption > h3 > a").text();
-        const url = $(this).find("figcaption > h3 > a").attr("href");
-        const image = $(this).find("a > img").attr("src");
-        const temp = $(this).find(".image > .clearfix > span").text().trim();
+        if (!limit || count < limit) { // Only process items within the limit
+          const name = $(this).find("figcaption > h3 > a").text();
+          const href = $(this).find("figcaption > h3 > a").attr("href");
+          const thumbnail = $(this).find("a > img").attr("src");
+          const temp = $(this).find(".image > .clearfix > span").text().trim();
 
-        const [views, comments, followers] = temp
-          .split("\n")
-          .map((item) => item.trim() || "0");
+          const [views, comments, followers] = temp
+            .split("\n")
+            .map((item) => item.trim() || "0");
 
-        thumbnail.push({
-          name,
-          url:
-            `${process.env.BASE_URL}/v1` + url.split(`${process.env.URL}`)[1],
-          image,
-          views,
-          comments,
-          followers,
-        });
+          data.push({
+            name,
+            href:
+              `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+            thumbnail,
+            views,
+            comments,
+            followers,
+          });
+          count++; // Increment count
+        }
       });
-      return res.status(200).json(thumbnail);
+      return res.status(200).json(data);
     });
   } catch (error) {
     console.log(error);
     res.status(500).json("Invalid Server");
   }
 };
+
+
 
 export const getDetailManga = async (req, res) => {
   try {
