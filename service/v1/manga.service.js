@@ -18,7 +18,8 @@ export const getAllManga = async (req, res) => {
       const $ = cheerio.load(html);
       let count = 0; // Initialize count of items
       $(".row > .item ", html).each(function () {
-        if (!limit || count < limit) { // Only process items within the limit
+        if (!limit || count < limit) {
+          // Only process items within the limit
           const name = $(this).find("figcaption > h3 > a").text();
           const href = $(this).find("figcaption > h3 > a").attr("href");
           const thumbnail = $(this).find("a > img").attr("src");
@@ -31,7 +32,8 @@ export const getAllManga = async (req, res) => {
           data.push({
             name,
             href:
-              `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+              `${process.env.BASE_URL}/v1` +
+              href.split(`${process.env.URL}`)[1],
             thumbnail,
             views,
             comments,
@@ -47,8 +49,6 @@ export const getAllManga = async (req, res) => {
     res.status(500).json("Invalid Server");
   }
 };
-
-
 
 export const getDetailManga = async (req, res) => {
   try {
@@ -176,9 +176,17 @@ export const getDetailChapter = async (req, res) => {
           images.push({ index, url });
         });
 
+      const prevChapter = $(this).find("#chapterNav > a.prev").attr("href");
+      const nextChapter = $(this).find("#chapterNav > a.next").attr("href");
       data.push({
         name: name.replace(/\s+/g, " ").trim(),
         chapter,
+        prevChapter:
+          `${process.env.BASE_URL}/v1` +
+          prevChapter.split(`${process.env.URL}`)[1],
+        nextChapter:
+          `${process.env.BASE_URL}/v1` +
+          nextChapter.split(`${process.env.URL}`)[1],
         time: time.replace(/\s+/g, " ").trim(),
         images,
       });
