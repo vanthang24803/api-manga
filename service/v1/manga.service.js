@@ -300,3 +300,79 @@ export const getListCategory = async (req, res) => {
     res.status(500).json({ message: "Invalid Server", error: error.message });
   }
 };
+
+export const getTopTier = async (req, res) => {
+  try {
+    const data = [];
+    let topUrl;
+    switch (req.params.type) {
+      case "new":
+        topUrl = `${process.env.URL}/tim-truyen?sort=8`;
+        break;
+      case "update":
+        topUrl = `${process.env.URL}/tim-truyen?sort=9`;
+        break;
+      case "all":
+        topUrl = `${process.env.URL}/tim-truyen?sort=10`;
+        break;
+      case "month":
+        topUrl = `${process.env.URL}/tim-truyen?sort=11`;
+        break;
+      case "week":
+        topUrl = `${process.env.URL}/tim-truyen?sort=12`;
+        break;
+      case "day":
+        topUrl = `${process.env.URL}/tim-truyen?sort=13`;
+        break;
+      case "follower":
+        topUrl = `${process.env.URL}/tim-truyen?sort=14`;
+        break;
+      default:
+        topUrl = `${process.env.URL}/tim-truyen?sort=10`;
+        break;
+    }
+
+    let response = await axios.get(topUrl);
+    const html = response.data;
+    const $ = cheerio.load(html);
+
+    const limit = req.query.item ? parseInt(req.query.item) : Infinity;
+
+    let count = 0;
+    $(
+      "#ctl00_divCenter > .Module-170 > .ModuleContent > .items > .row > .item ",
+      html
+    ).each(function () {
+      if (count >= limit) {
+        return false; // Dừng vòng lặp khi đạt đến giới hạn
+      }
+      const name = $(this).find(".clearfix > .image > a").attr("title");
+      const href = $(this).find(".clearfix > .image > a").attr("href");
+      const temp = $(this).find(".image > .clearfix > span").text().trim();
+      const thumbnail = $(this)
+        .find(".clearfix > .image > a > img")
+        .attr("src");
+      const [views, comments, followers] = temp
+        .split("\n")
+        .map((item) => item.trim() || "0");
+
+      data.push({
+        name,
+        thumbnail,
+        href:
+          `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+        views,
+        comments,
+        followers,
+      });
+
+      count++;
+    });
+
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Invalid Server", error: error.message });
+  }
+};
+
