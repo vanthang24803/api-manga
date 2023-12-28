@@ -375,4 +375,3 @@ export const getTopTier = async (req, res) => {
     res.status(500).json({ message: "Invalid Server", error: error.message });
   }
 };
-
