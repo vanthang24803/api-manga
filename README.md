@@ -1,6 +1,12 @@
-# MANGA API
+<div align="center">
+  <a href="https://github.com/vanthang24803/manga-nextjs-14">
+    <img src="https://utfs.io/f/93b15ab6-043f-4315-9219-b096ca943f88-1zbfv.png" alt="logo" width="200" height="200">
+  </a>
+</div>
 
-Real-time API for reading applications
+<h2 align="center">MANGA DEX API</h2>
+
+<p align="center">Real-time API for Manga applications</p>
 
 ## Run Locally
 
