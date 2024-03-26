@@ -31,9 +31,7 @@ export const getAllManga = async (req, res) => {
 
           data.push({
             name,
-            href:
-              `${process.env.BASE_URL}/v1` +
-              href.split(`${process.env.URL}`)[1],
+            href: `${process.env.BASE_URL}/v1/` + href?.split(`${process.env.URL}`)[1],
             thumbnail,
             views,
             comments,
@@ -92,7 +90,7 @@ export const getDetailManga = async (req, res) => {
             categories.push({
               name,
               href:
-                `${process.env.BASE_URL}/v1` +
+                `${process.env.BASE_URL}/v1/` +
                 href.split(`${process.env.URL}`)[1],
             });
           });
@@ -119,7 +117,7 @@ export const getDetailManga = async (req, res) => {
             chapters.push({
               name,
               href:
-                `${process.env.BASE_URL}/v1` +
+                `${process.env.BASE_URL}/v1/` +
                 href.split(`${process.env.URL}`)[1],
               time,
               views,
@@ -182,10 +180,10 @@ export const getDetailChapter = async (req, res) => {
         name: name.replace(/\s+/g, " ").trim(),
         chapter,
         prevChapter:
-          `${process.env.BASE_URL}/v1` +
+          `${process.env.BASE_URL}/v1/` +
           prevChapter.split(`${process.env.URL}`)[1],
         nextChapter:
-          `${process.env.BASE_URL}/v1` +
+          `${process.env.BASE_URL}/v1/` +
           nextChapter.split(`${process.env.URL}`)[1],
         time: time.replace(/\s+/g, " ").trim(),
         images,
@@ -220,7 +218,7 @@ export const searchManga = async (req, res) => {
       data.push({
         name,
         href:
-          `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+          `${process.env.BASE_URL}/v1/` + href.split(`${process.env.URL}`)[1],
         thumbnail,
         views,
         comments,
@@ -260,7 +258,7 @@ export const getCategory = async (req, res) => {
         name,
         thumbnail,
         href:
-          `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+          `${process.env.BASE_URL}/v1/` + href.split(`${process.env.URL}`)[1],
         views,
         comments,
         followers,
@@ -290,7 +288,7 @@ export const getListCategory = async (req, res) => {
       data.push({
         name,
         href:
-          `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+          `${process.env.BASE_URL}/v1/` + href.split(`${process.env.URL}`)[1],
       });
     });
 
@@ -360,7 +358,7 @@ export const getTopTier = async (req, res) => {
         name,
         thumbnail,
         href:
-          `${process.env.BASE_URL}/v1` + href.split(`${process.env.URL}`)[1],
+          `${process.env.BASE_URL}/v1/` + href.split(`${process.env.URL}`)[1],
         views,
         comments,
         followers,
